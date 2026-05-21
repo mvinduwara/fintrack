@@ -1,0 +1,178 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  password      String
+  name          String
+  avatar        String?
+  businessName  String?
+  currency      String         @default("USD")
+  timezone      String         @default("UTC")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  accounts      Account[]
+  transactions  Transaction[]
+  budgets       Budget[]
+  goals         Goal[]
+  investments   Investment[]
+  categories    Category[]
+  refreshTokens RefreshToken[]
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  name         String
+  type         AccountType
+  balance      Float         @default(0)
+  currency     String        @default("USD")
+  institution  String?
+  isDefault    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  transactions Transaction[]
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT
+  INVESTMENT
+  CASH
+}
+
+model Category {
+  id           String        @id @default(cuid())
+  userId       String?
+  user         User?         @relation(fields: [userId], references: [id])
+  name         String
+  type         CategoryType
+  color        String
+  icon         String
+  isDefault    Boolean       @default(false)
+  transactions Transaction[]
+  budgets      Budget[]
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+model Transaction {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id])
+  accountId   String
+  account     Account         @relation(fields: [accountId], references: [id])
+  categoryId  String?
+  category    Category?       @relation(fields: [categoryId], references: [id])
+  amount      Float
+  type        TransactionType
+  description String
+  date        DateTime
+  tags        String[]
+  attachments String[]
+  isRecurring Boolean         @default(false)
+  recurringId String?
+  notes       String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+  TRANSFER
+}
+
+model Budget {
+  id         String       @id @default(cuid())
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
+  categoryId String
+  category   Category     @relation(fields: [categoryId], references: [id])
+  amount     Float
+  spent      Float        @default(0)
+  period     BudgetPeriod
+  startDate  DateTime
+  endDate    DateTime
+  alerts     Boolean      @default(true)
+  alertAt    Float        @default(80)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+enum BudgetPeriod {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+model Goal {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  name         String
+  targetAmount Float
+  savedAmount  Float      @default(0)
+  deadline     DateTime?
+  category     String
+  color        String
+  icon         String
+  status       GoalStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+}
+
+model Investment {
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+  symbol        String
+  name          String
+  type          InvestmentType
+  shares        Float
+  avgCostBasis  Float
+  currentPrice  Float
+  sector        String?
+  exchange      String?
+  notes         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+enum InvestmentType {
+  STOCK
+  ETF
+  CRYPTO
+  BOND
+  MUTUAL_FUND
+  REAL_ESTATE
+  OTHER
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
