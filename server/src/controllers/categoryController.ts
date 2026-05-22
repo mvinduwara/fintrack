@@ -18,6 +18,7 @@ export const getCategories = async (req: AuthRequest, res: Response) => {
   res.json(categories);
 };
 
+
 export const createCategory = async (req: AuthRequest, res: Response) => {
   try {
     const data = catSchema.parse(req.body);

@@ -11,6 +11,7 @@ const updateSchema = z.object({
   newPassword: z.string().min(6).optional(),
 });
 
+
 export const updateUser = async (req: AuthRequest, res: Response) => {
   try {
     const { name, email, currentPassword, newPassword } = updateSchema.parse(req.body);

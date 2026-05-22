@@ -25,6 +25,7 @@ export const getCategoryBreakdown = async (req: AuthRequest, res: Response) => {
   const y = parseInt(year) || new Date().getFullYear();
   const start = new Date(y, m - 1, 1);
   const end = new Date(y, m, 0, 23, 59, 59);
+  
 
   const data = await prisma.transaction.groupBy({
     by: ['categoryId'],

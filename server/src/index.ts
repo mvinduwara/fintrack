@@ -12,6 +12,7 @@ import userRoutes from './routes/users';
 
 dotenv.config();
 
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 

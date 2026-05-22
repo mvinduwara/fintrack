@@ -67,6 +67,7 @@ export const updateTransaction = async (req: AuthRequest, res: Response) => {
   }
 };
 
+
 export const deleteTransaction = async (req: AuthRequest, res: Response) => {
   try {
     const tx = await prisma.transaction.findFirst({ where: { id: req.params.id, userId: req.userId } });

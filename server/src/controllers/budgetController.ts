@@ -21,7 +21,6 @@ export const getBudgets = async (req: AuthRequest, res: Response) => {
     include: { category: true },
   });
 
-  // Calculate spending for each budget
   const enriched = await Promise.all(budgets.map(async (b) => {
     const start = new Date(b.year, b.month - 1, 1);
     const end = new Date(b.year, b.month, 0, 23, 59, 59);
