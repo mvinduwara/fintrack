@@ -96,7 +96,7 @@ export default function BudgetsPage() {
         </div>
       )}
 
-      {/* Alert */}
+     
       {overBudget > 0 && (
         <div className="animate-fade-up" style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 18px', borderRadius: '14px', background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.2)', marginBottom: '20px' }}>
           <AlertTriangle size={16} color="#f87171" />
@@ -167,7 +167,6 @@ export default function BudgetsPage() {
         </div>
       )}
 
-      {/* Modal */}
       {showModal && (
         <Modal title="Set Budget" onClose={() => setShowModal(false)}>
           <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
