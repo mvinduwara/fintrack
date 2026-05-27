@@ -82,7 +82,7 @@ export default function LoginPage() {
           ))}
         </div>
 
-        {/* Stats */}
+
         <div className="animate-fade-up stagger-4" style={{ display: 'flex', gap: '32px', marginTop: '56px', paddingTop: '40px', borderTop: '1px solid var(--border)' }}>
           {[['10k+', 'Users'], ['$2M+', 'Tracked'], ['99.9%', 'Uptime']].map(([val, label]) => (
             <div key={label}>
@@ -93,7 +93,6 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right Panel - Form */}
       <div style={{ width: '100%', maxWidth: '480px', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 40px' }}>
         {/* Mobile logo */}
         <div className="lg:hidden animate-fade-up stagger-1" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '40px' }}>
