@@ -186,7 +186,6 @@ export default function TransactionsPage() {
         )}
       </div>
 
-      {/* Modal */}
       {showModal && (
         <Modal title={`${editing ? 'Edit' : 'Add'} Transaction`} onClose={() => setShowModal(false)}>
           <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
