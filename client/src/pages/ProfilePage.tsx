@@ -148,7 +148,6 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Password strength */}
           {newPassword && (
             <div>
               <div style={{ display: 'flex', gap: '4px', marginBottom: '6px' }}>
