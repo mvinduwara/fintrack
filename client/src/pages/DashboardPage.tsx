@@ -31,7 +31,7 @@ export default function DashboardPage() {
 
   return (
     <div style={{ padding: '40px', maxWidth: '1200px' }}>
-      {/* Header */}
+     
       <div className="animate-fade-up stagger-1" style={{ marginBottom: '36px' }}>
         <h1 style={{ fontSize: '28px', fontFamily: 'Syne', fontWeight: 700, color: '#fff', marginBottom: '4px' }}>Dashboard</h1>
         <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{format(new Date(), 'EEEE, MMMM d, yyyy')}</p>
@@ -53,7 +53,7 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Recent Transactions */}
+     
       <div className="card animate-fade-up stagger-3" style={{ padding: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <h2 style={{ fontSize: '17px', fontFamily: 'Syne', fontWeight: 700, color: '#fff' }}>Recent Transactions</h2>
